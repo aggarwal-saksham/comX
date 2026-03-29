@@ -194,6 +194,6 @@ Frontend default URL:
 - The backend expects cookie-based auth, so frontend requests use `withCredentials: true`.
 - File uploads are first written locally by Multer and then uploaded to Cloudinary.
 - Email verification and password reset rely on SMTP credentials configured in backend env.
-- LiveKit token issuance is handled by the backend route `/community/livekit/get-token`.
+- LiveKit token issuance is handled by the backend route `/community/livekit/get-token`
 
 
