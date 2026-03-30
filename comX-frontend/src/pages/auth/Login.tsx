@@ -84,7 +84,7 @@ function LoginInForm() {
         Welcome Back to ComX
       </h2>
       <p className="text-neutral-600 text-sm max-w-sm mt-2 dark:text-neutral-300">
-        Login to ComX if you can because we don&apos;t have a login flow yet
+        Sign in to continue to your workspace.
       </p>
 
       <form className="my-8" onSubmit={handleSubmit}>
@@ -92,7 +92,7 @@ function LoginInForm() {
           <Label htmlFor="email">Username/Email Address</Label>
           <Input
             id="loginDetails"
-            placeholder="iit2023249@iiita.ac.in"
+            placeholder="saksham@example.com or sakshamaggarwal"
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}

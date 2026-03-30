@@ -48,11 +48,10 @@ export default function SignUpFormPage2({
   return (
     <div className="max-w-md sm:w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input border border-slate-300 bg-white dark:bg-black w-[80%] mt-36">
       <h2 className="font-bold text-xl text-neutral-800 dark:text-neutral-200">
-        Welcome to E-Commerce
+        Verify your email
       </h2>
       <p className="text-neutral-600 text-sm max-w-sm mt-2 dark:text-neutral-300">
-        SignUp to E-Commerce if you can because we don&apos;t have a sign up
-        flow yet
+        Enter the 6-digit code we sent to your email address to finish creating your account.
       </p>
 
       <form className="my-8" onSubmit={handleSubmit}>

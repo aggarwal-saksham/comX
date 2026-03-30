@@ -75,11 +75,10 @@ export default function SignUpFormPage1({
   return (
     <div className="max-w-md sm:w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input border border-slate-300 bg-white dark:bg-black w-[80%] translate-y-12">
       <h2 className="font-bold text-xl text-neutral-800 dark:text-neutral-200">
-        Welcome to E-Commerce
+        Create your ComX account
       </h2>
       <p className="text-neutral-600 text-sm max-w-sm mt-2 dark:text-neutral-300">
-        SignUp to E-Commerce if you can because we don&apos;t have a sign up
-        flow yet
+        Join your team, collaborate on projects, and stay connected in one place.
       </p>
 
       <form className="my-8" onSubmit={handleSubmit(onSubmit)}>
@@ -87,7 +86,7 @@ export default function SignUpFormPage1({
           <Label htmlFor="name">Name</Label>
           <Input
             id="name"
-            placeholder="Abc"
+            placeholder="Saksham Aggarwal"
             type="text"
             {...register("name", { required: true })}
           />
@@ -101,7 +100,7 @@ export default function SignUpFormPage1({
           <Label htmlFor="username">Username</Label>
           <Input
             id="username"
-            placeholder="Abc02"
+            placeholder="sakshamaggarwal"
             type="text"
             {...register("username", { required: true })}
           />
@@ -115,7 +114,7 @@ export default function SignUpFormPage1({
           <Label htmlFor="email">Email Address</Label>
           <Input
             id="email"
-            placeholder="abc@gmail.com"
+            placeholder="saksham@example.com"
             type="email"
             {...register("email", { required: true })}
           />
@@ -129,7 +128,6 @@ export default function SignUpFormPage1({
           <Label htmlFor="coverImage">Profile Picture</Label>
           <Input
             id="coverImage"
-            placeholder="abc@gmail.com"
             type="file"
             ref={profilePic}
           />
