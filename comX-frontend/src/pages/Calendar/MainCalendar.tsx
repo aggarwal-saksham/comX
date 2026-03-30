@@ -14,19 +14,10 @@ interface CalendarEvent {
   color: string;
 }
 
-const colorPalette = [
-  "bg-red-400",
-  "bg-blue-400",
-  "bg-green-400",
-  "bg-yellow-400",
-  "bg-purple-400",
-  "bg-pink-400",
-];
-
 const weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
 export default function MainCalendar() {
-  const [events, setEvents] = useState<CalendarEvent[]>([]);
+  const [events] = useState<CalendarEvent[]>([]);
 
   const { tasks, tasksLoading, tasksError } = CalendarAPI();
 

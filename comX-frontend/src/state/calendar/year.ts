@@ -12,7 +12,7 @@ const yearSlice = createSlice({
   name: "year",
   initialState,
   reducers: {
-    setYear(state: string, payload) {
+    setYear(_state: string, payload) {
       window.localStorage.setItem("calendar-year", payload.payload);
       return payload.payload;
     },

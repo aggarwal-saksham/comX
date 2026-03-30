@@ -6,10 +6,11 @@ import { PrismaClient } from '@prisma/client';
 import { Server as SocketIOServer } from 'socket.io';
 
 // ─── Express App Setup ──────────────────────────────
-const allowedOrigins: string[] = [];
-
-if (process.env.FRONTEND_URL) allowedOrigins.push(process.env.FRONTEND_URL);
-allowedOrigins.push('http://localhost:5173');
+const defaultFrontendOrigin = 'http://localhost:5173';
+const configuredOrigins = process.env.FRONTEND_URL
+  ? process.env.FRONTEND_URL.split(',').map((origin) => origin.trim()).filter(Boolean)
+  : [];
+const allowedOrigins = Array.from(new Set([...configuredOrigins, defaultFrontendOrigin]));
 
 const app = express();
 const server = http.createServer(app); // ✅ shared server
@@ -34,7 +35,7 @@ app.use(cors({
 
 // ─── Routes ─────────────────────────────────────────
 app.get('/', (req: Request, res: Response) => {
-  res.send('server is running');
+  res.json({ status: 'ok', message: 'server is running' });
 });
 
 app.use('/auth', require('./routes/auth.route'));
@@ -117,7 +118,7 @@ io.on('connect', (socket) => {
 });
 
 // ─── Start Server ───────────────────────────────────
-const PORT = parseInt(process.env.PORT as string, 10);
+const PORT = Number(process.env.PORT) || 3000;
 console.log('🔍 Render assigned PORT:', process.env.PORT);
 console.log('🏁 Attempting to listen on port:', PORT);
 

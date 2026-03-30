@@ -11,7 +11,7 @@ const activeServerSlice = createSlice({
   name: "active-Server",
   initialState,
   reducers: {
-    setActiveServer(state: number, payload) {
+    setActiveServer(_state: number, payload) {
       window.localStorage.setItem("active-server", payload.payload);
       return payload.payload;
     },

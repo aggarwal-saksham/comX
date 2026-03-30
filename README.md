@@ -196,4 +196,77 @@ Frontend default URL:
 - Email verification and password reset rely on SMTP credentials configured in backend env.
 - LiveKit token issuance is handled by the backend route `/community/livekit/get-token`
 
+## Deployment
+
+Recommended free-tier setup:
+
+- frontend on Vercel
+- backend on Render
+- database on Neon or Supabase Postgres
+- video calling on LiveKit Cloud
+- media uploads on Cloudinary
+
+### 1. Backend on Render
+
+- Create a new Web Service from this repository.
+- Set `Root Directory` to `comX-backend`.
+- Render can also detect the included `render.yaml` blueprint from the repo root.
+- Use:
+  - Build Command: `npm install && npm run build`
+  - Start Command: `npm start`
+
+Backend environment variables:
+
+```env
+DATABASE_URL=postgresql://USER:PASSWORD@HOST:5432/comx
+JWT_SECRET=replace_with_a_long_random_secret
+FRONTEND_URL=https://your-frontend.vercel.app
+EMAIL=your_email_address
+PASSWORD=your_email_app_password
+CLOUDINARY_CLOUD_NAME=your_cloud_name
+CLOUDINARY_API_KEY=your_cloudinary_api_key
+CLOUDINARY_API_SECRET=your_cloudinary_api_secret
+LIVEKIT_API_KEY=your_livekit_api_key
+LIVEKIT_API_SECRET=your_livekit_api_secret
+```
+
+Notes:
+
+- `FRONTEND_URL` can be a comma-separated list if you want to allow multiple origins.
+- `npm start` already runs `prisma migrate deploy` before starting the server.
+
+### 2. Frontend on Vercel
+
+- Import the same repository in Vercel.
+- Set the project root to `comX-frontend`.
+- Framework preset: `Vite`
+- Build command: `npm run build`
+- Output directory: `dist`
+
+Frontend environment variables:
+
+```env
+VITE_BACKEND_URL=https://your-backend.onrender.com
+VITE_SOCKET_URL=https://your-backend.onrender.com
+VITE_PUBLIC_LIVEKIT_URL=wss://your-livekit-instance.livekit.cloud
+```
+
+The included `comX-frontend/vercel.json` rewrites all routes to `index.html`, which is required for React Router deep links.
+
+### 3. Post-deploy verification
+
+After both services are live, verify:
+
+- register, email OTP, login, logout
+- community creation and joining
+- project and task flows
+- Socket.IO chat
+- image uploads to Cloudinary
+- LiveKit call join flow
+
+### 4. Security cleanup before public launch
+
+- Rotate any secrets that were previously stored in local `.env` files.
+- Do not commit real production secrets.
+- Prefer separate credentials for development and production.
 

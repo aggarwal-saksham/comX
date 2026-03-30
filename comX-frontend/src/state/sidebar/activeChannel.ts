@@ -11,7 +11,7 @@ const activeChannelSlice = createSlice({
   name: "active-channel",
   initialState,
   reducers: {
-    setActiveChannel(state: number, payload) {
+    setActiveChannel(_state: number, payload) {
       window.localStorage.setItem("active-channel", payload.payload);
       return payload.payload;
     },
