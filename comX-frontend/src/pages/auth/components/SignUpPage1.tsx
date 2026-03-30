@@ -14,6 +14,7 @@ import { ReloadIcon } from "@radix-ui/react-icons";
 import { BottomGradient, LabelInputContainer } from "./SignUpExtraComponenets";
 
 const backend_url = import.meta.env.VITE_BACKEND_URL;
+const defaultDesignation = "Student";
 
 export default function SignUpFormPage1({
   setCurrentPage,
@@ -27,11 +28,13 @@ export default function SignUpFormPage1({
     handleSubmit,
     formState: { errors },
   } = useForm<UserData>({
-    defaultValues: { designation: "Student" },
+    defaultValues: { designation: defaultDesignation },
     resolver: zodResolver(UserDataSchema),
   });
 
-  const [post, setPost] = useState("");
+  const [post, setPost] = useState(
+    designation.find((item) => item.value === defaultDesignation)?.id.toString() ?? ""
+  );
   const profilePic = useRef<HTMLInputElement>(null);
 
   const { mutateAsync: submitForm, isPending } = useMutation({
@@ -57,6 +60,9 @@ export default function SignUpFormPage1({
 
   const onSubmit: SubmitHandler<UserData> = async (data) => {
     try {
+      const selectedDesignation =
+        designation.find((item) => item.id.toString() === post)?.value ?? defaultDesignation;
+      data.designation = selectedDesignation;
       toast.success("Form Submitted");
       email.current.value = data.email;
       await submitForm(data);
