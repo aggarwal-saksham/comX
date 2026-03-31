@@ -6,7 +6,7 @@ import { prisma } from "../../config/dbConnect";
 export const accept_join_request = async (req: Request, res: Response) => {
     try{
         const {communityId} = req.body;
-        let memberId: number = req.body.memberId;
+        const memberId: number = Number(req.body.memberId ?? req.body.member_id);
         if(!memberId){
             return responseCodes.clientError.badRequest(res, "no memberId recieved");
         }

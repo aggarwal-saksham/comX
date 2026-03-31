@@ -57,7 +57,7 @@ export default function Invite_MemberManagement(props: PROPS) {
                           () =>
                             mutations.accept.mutateAsync({
                               communityId: parseInt(ID!, 10),
-                              member_id: invite.id,
+                              memberId: invite.id,
                             }),
                           `Accept ${invite.name} as a member?`
                         )

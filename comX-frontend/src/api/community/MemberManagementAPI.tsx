@@ -98,7 +98,7 @@ export default function MemberManagementAPI({
     accept: useMutation({
       mutationFn: async (details: {
         communityId: number;
-        member_id: number;
+        memberId: number;
       }) => {
         return axios.post(
           `${backend_url}/member/accept-join-request`,
