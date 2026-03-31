@@ -22,6 +22,7 @@ import { ReloadIcon } from "@radix-ui/react-icons";
 import { Label } from "@radix-ui/react-label";
 import { useMutation , useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
+import { X } from "lucide-react";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useParams } from "react-router-dom";
@@ -106,6 +107,17 @@ export default function CreateTask({ milestone }: { milestone: string }) {
           </span>
         </AlertDialogTrigger>
         <AlertDialogContent className="h-full overflow-y-scroll no-scrollbar">
+          <div className="flex justify-end">
+            <AlertDialogCancel>
+              <button
+                type="button"
+                className="rounded-full p-2 text-gray-500 transition hover:bg-gray-100 hover:text-gray-700"
+                aria-label="Close create task panel"
+              >
+                <X className="h-5 w-5" />
+              </button>
+            </AlertDialogCancel>
+          </div>
           <AlertDialogHeader>
             <AlertDialogTitle>Create Task</AlertDialogTitle>
             <AlertDialogDescription />
