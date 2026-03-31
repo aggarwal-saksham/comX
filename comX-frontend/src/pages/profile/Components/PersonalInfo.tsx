@@ -22,9 +22,14 @@ import { Separator } from "@/components/ui/separator";
 import { Progress } from "@/components/ui/progress";
 import ErrorPage from "@/pages/genral/ErrorPage";
 import ProfileAPI from "@/api/profile/ProfileAPI";
+import { useDispatch } from "react-redux";
+import { clearUser } from "@/state/userDetails/userDetails";
+import { useNavigate } from "react-router-dom";
 
 export default function PersonalInfo() {
   const { profile, profileLoading, profileError } = ProfileAPI();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   if (profileLoading) return <div>Loading ...</div>;
   if (profileError) return <ErrorPage />;
@@ -201,8 +206,18 @@ export default function PersonalInfo() {
         </div>
       </CardContent>
       <CardFooter className="flex justify-between">
-        <Button variant="outline">Edit Profile</Button>
-        <Button variant="destructive">Logout</Button>
+        <Button variant="outline" disabled>
+          Edit Profile (Coming soon)
+        </Button>
+        <Button
+          variant="destructive"
+          onClick={() => {
+            dispatch(clearUser());
+            navigate("/login");
+          }}
+        >
+          Logout
+        </Button>
       </CardFooter>
     </Card>
   );
