@@ -25,7 +25,7 @@ export const Server = [
   {
     id: 4,
     name: "General",
-    link: <MessageCircleMore />,
+    link: <Info />,
   },
   {
     id: 5,
@@ -39,8 +39,8 @@ export const Server = [
   },
   {
     id: 3,
-    name: "Code",
-    link: <Braces />,
+    name: "Call",
+    link: <MessageCircleMore />,
   },
 ];
 
