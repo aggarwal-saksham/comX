@@ -129,11 +129,10 @@ function ForgotPasswordForm() {
   return (
     <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input border border-slate-300 bg-white dark:bg-black mt-32">
       <h2 className="font-bold text-xl text-neutral-800 dark:text-neutral-200 w-96">
-        Did You Forgot Your Password ?
+        Reset your password
       </h2>
       <p className="text-neutral-600 text-sm max-w-sm mt-2 dark:text-neutral-300">
-        Don't Worry <br />
-        We are here to help !
+        Enter your email, verify the OTP, and choose a new password.
       </p>
 
       <form className="my-8">
@@ -143,7 +142,7 @@ function ForgotPasswordForm() {
               <Label htmlFor="email">Email Address</Label>
               <Input
                 id="loginDetails"
-                placeholder="iit2023249@iiita.ac.in"
+                placeholder="saksham@example.com"
                 type="text"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -211,7 +210,7 @@ function ForgotPasswordForm() {
               <Label htmlFor="email">Password</Label>
               <Input
                 id="password"
-                placeholder="********"
+                placeholder="Enter your new password"
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -221,7 +220,7 @@ function ForgotPasswordForm() {
               <Label htmlFor="email">Confirm Password</Label>
               <Input
                 id="confirm-password"
-                placeholder="********"
+                placeholder="Confirm your new password"
                 type="password"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
