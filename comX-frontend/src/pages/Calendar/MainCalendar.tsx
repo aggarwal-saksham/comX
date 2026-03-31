@@ -17,8 +17,6 @@ interface CalendarEvent {
 const weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
 export default function MainCalendar() {
-  const [events] = useState<CalendarEvent[]>([]);
-
   const { tasks, tasksLoading, tasksError } = CalendarAPI();
 
   const activeChannel = useSelector((state: RootState) => state.activeChannel);
@@ -56,16 +54,7 @@ export default function MainCalendar() {
   if (tasksLoading) return <div>Loading ...</div>;
   if (tasksError) return <ErrorPage />;
 
-  console.log(tasks[0].projects);
-  let taskList;
-  // tasks[0].projects.forEach((tasks: { tasks: unknown }[]) => {
-  //   tasks.tasks.forEach((item: unknown) => {
-  //     // taskList.push(item);
-  //     console.log(item);
-  //   });
-  // });
-
-  console.log(taskList);
+  const events: CalendarEvent[] = Array.isArray(tasks) ? tasks : [];
 
   const getDaysInMonth = (year: number, month: number) => {
     const firstDay = DateTime.local(year, month, 1);

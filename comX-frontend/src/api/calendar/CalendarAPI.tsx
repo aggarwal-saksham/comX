@@ -11,7 +11,7 @@ export default function CalendarAPI() {
     queryKey: [`calendar/${ID}`],
     queryFn: async () => {
       const response = await axios.get(
-        `${backend_url}/task/get-all-tasks-in-community/${ID}`,
+        `${backend_url}/calendar/get-calendar-task/${ID}`,
         {
           withCredentials: true,
         }
