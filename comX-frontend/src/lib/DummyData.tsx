@@ -1,5 +1,5 @@
 import { LockClosedIcon } from "@radix-ui/react-icons";
-import { Hash, Info, Users, Bell, Calendar, Settings, MessageCircleMore, FolderKanban, CheckCheck, Braces } from "lucide-react";
+import { Hash, Info, Users, Bell, Calendar, Settings, MessageCircleMore, FolderKanban, CheckCheck} from "lucide-react";
 import {
   CalendarDays,
   CloudDrizzle,
