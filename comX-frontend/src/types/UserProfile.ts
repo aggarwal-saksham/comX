@@ -1,5 +1,4 @@
 import { z } from "zod";
-// import RegisterRequest from "@prathamjain522/comx-common";
 
 export type Designation = {
   value: string;
