@@ -2,11 +2,10 @@
 
 ComX is a full-stack collaboration platform for teams and communities. It combines authentication, community management, project tracking, task workflows, real-time chat, shared calendars, video calls, and public user profiles in one codebase.
 
-This repository is a multi-package monorepo with:
+This repository contains:
 
 - `comX-frontend`: React + Vite client
 - `comX-backend`: Express + Prisma API and Socket.IO server
-- `common`: shared Zod schemas and request types
 
 ## Features
 
@@ -53,19 +52,10 @@ This repository is a multi-package monorepo with:
 - Cloudinary
 - LiveKit Server SDK
 
-### Shared
-
-- Zod
-- TypeScript
-
 ## Repository Structure
 
 ```text
 .
-|-- common/
-|   `-- src/
-|       |-- index.ts
-|       `-- types/
 |-- comX-backend/
 |   |-- prisma/
 |   |   |-- migrations/
@@ -75,6 +65,7 @@ This repository is a multi-package monorepo with:
 |       |-- controllers/
 |       |-- middlewares/
 |       |-- routes/
+|       |-- schemas/
 |       |-- types/
 |       |-- utils/
 |       `-- server.ts
@@ -153,10 +144,7 @@ VITE_PUBLIC_LIVEKIT_URL=your_livekit_ws_url
 ### Install dependencies
 
 ```bash
-cd common
-npm install
-
-cd ../comX-backend
+cd comX-backend
 npm install
 
 cd ../comX-frontend
@@ -192,6 +180,7 @@ Frontend default URL:
 ## Notes
 
 - The backend expects cookie-based auth, so frontend requests use `withCredentials: true`.
+- Request validation schemas now live directly under `comX-backend/src/schemas`.
 - File uploads are first written locally by Multer and then uploaded to Cloudinary.
 - Email verification and password reset rely on SMTP credentials configured in backend env.
 - LiveKit token issuance is handled by the backend route `/community/livekit/get-token`
@@ -269,4 +258,3 @@ After both services are live, verify:
 - Rotate any secrets that were previously stored in local `.env` files.
 - Do not commit real production secrets.
 - Prefer separate credentials for development and production.
-

@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { responseCodes } from "../../utils/response-codes";
 import { prisma } from "../../config/dbConnect";
-import { verifyEmailOtpRequest, verifyEmailOtpSchema } from "@prathamjain522/comx-common";
+import { verifyEmailOtpRequest, verifyEmailOtpSchema } from "../../schemas/auth.schema";
 import { bodyParser } from "../../utils/body-parser";
 
 export const verify_email_otp = async(req: Request, res: Response) => {

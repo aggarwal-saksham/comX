@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { prisma } from "../../config/dbConnect";
 import { responseCodes } from "../../utils/response-codes";
-import { changePasswordRequest, changePasswordSchema, verifyForgotPasswordRequest, verifyForgotPasswordSchema } from "@prathamjain522/comx-common";
+import { changePasswordRequest, changePasswordSchema, verifyForgotPasswordRequest, verifyForgotPasswordSchema } from "../../schemas/auth.schema";
 import { bodyParser } from "../../utils/body-parser";
 import bcryptjs from "bcryptjs";
 export const verify_forgot_password_otp = async(req: Request, res: Response) => {

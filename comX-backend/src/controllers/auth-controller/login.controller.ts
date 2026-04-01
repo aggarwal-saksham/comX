@@ -3,7 +3,7 @@ import { create_token } from "../../utils/token";
 import { responseCodes } from "../../utils/response-codes";
 import { prisma } from "../../config/dbConnect";
 import bcryptjs from "bcryptjs";
-import { loginRequest, loginRequestSchema } from "@prathamjain522/comx-common";
+import { loginRequest, loginRequestSchema } from "../../schemas/auth.schema";
 import { bodyParser } from "../../utils/body-parser";
 
 export const login = async (req: Request, res: Response) => {

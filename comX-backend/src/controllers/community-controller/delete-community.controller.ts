@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { prisma } from '../../config/dbConnect';
 import { responseCodes } from '../../utils/response-codes';
-import { deleteCommunityRequest, deleteCommunitySchema } from '@prathamjain522/comx-common';
+import { deleteCommunityRequest, deleteCommunitySchema } from '../../schemas/community.schema';
 import { bodyParser } from '../../utils/body-parser';
 
 // Delete a community (only the owner can delete)

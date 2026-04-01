@@ -3,7 +3,7 @@ import { prisma } from '../../config/dbConnect';
 import { responseCodes } from '../../utils/response-codes'; // Importing response codes
 import fs from "fs";
 import { uploadOnCloudinary } from '../../utils/cloudinary';
-import { updateCommunityRequest, updateCommunitySchema } from '@prathamjain522/comx-common';
+import { updateCommunityRequest, updateCommunitySchema } from '../../schemas/community.schema';
 import { bodyParser } from '../../utils/body-parser';
 
 export const update_community = async (req: Request, res: Response) => {

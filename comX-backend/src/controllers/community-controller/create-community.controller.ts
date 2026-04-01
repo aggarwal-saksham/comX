@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { prisma } from '../../config/dbConnect';
 import { responseCodes } from '../../utils/response-codes'; // Importing response codes
 import { v4 as uuidv4 } from 'uuid'; // To generate unique codes
-import { createCommunityRequest, createCommunitySchema } from '@prathamjain522/comx-common';
+import { createCommunityRequest, createCommunitySchema } from '../../schemas/community.schema';
 import { bodyParser } from '../../utils/body-parser';
 
 // Function to generate a unique join code

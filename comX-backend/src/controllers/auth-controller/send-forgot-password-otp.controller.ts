@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { responseCodes } from "../../utils/response-codes";
 import { generateOTP, sendOtpEmail } from "./send-email-otp.controller";
-import { sendForgotPasswordRequest, sendForgotPasswordSchema } from "@prathamjain522/comx-common";
+import { sendForgotPasswordRequest, sendForgotPasswordSchema } from "../../schemas/auth.schema";
 import { bodyParser } from "../../utils/body-parser";
 export const send_forgot_password_otp = async(req: Request, res: Response) =>{
     try {

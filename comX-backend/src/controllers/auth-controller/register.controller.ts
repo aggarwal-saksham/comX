@@ -6,7 +6,7 @@ import { generateOTP, sendOtpEmail } from "./send-email-otp.controller";
 import { prisma } from "../../config/dbConnect";
 import bcryptjs from "bcryptjs";
 import fs from "fs";
-import { registerRequestSchema, registerRequest } from "@prathamjain522/comx-common";
+import { registerRequestSchema, registerRequest } from "../../schemas/auth.schema";
 import { uploadOnCloudinary } from "../../utils/cloudinary";
 import { bodyParser } from "../../utils/body-parser";
 

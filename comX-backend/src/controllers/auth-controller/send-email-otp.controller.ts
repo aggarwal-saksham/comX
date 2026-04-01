@@ -2,7 +2,7 @@ import nodemailer from 'nodemailer';
 import { Request, Response } from "express";
 import { responseCodes } from '../../utils/response-codes';
 import { prisma } from '../../config/dbConnect';
-import { sendEmailOtpRequest, sendEmailOtpRequestSchema } from '@prathamjain522/comx-common';
+import { sendEmailOtpRequest, sendEmailOtpRequestSchema } from '../../schemas/auth.schema';
 import { bodyParser } from '../../utils/body-parser';
 
 export function generateOTP(): string {
