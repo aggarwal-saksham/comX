@@ -42,6 +42,8 @@ export default function CommunityCard({
   }
 
   const navigate = useNavigate();
+  const ownerName = owner?.name ?? "Unknown owner";
+  const ownerAvatar = owner?.avatar || "https://github.com/shadcn.png";
 
   function redirectToCommunity() {
     navigate(`/community/${id.toString()}`);
@@ -68,13 +70,13 @@ export default function CommunityCard({
         <p className="text-sm text-gray-600 mb-4">{description}</p>
         <div className="flex items-center mb-4">
           <img
-            src={owner.avatar? owner.avatar : "https://github.com/shadcn.png"}
-            alt={owner.name}
+            src={ownerAvatar}
+            alt={ownerName}
             width={40}
             height={40}
             className="rounded-full mr-2"
           />
-          <span className="text-sm text-gray-700">Founded by {owner.name}</span>
+          <span className="text-sm text-gray-700">Founded by {ownerName}</span>
         </div>
         <div className="flex flex-wrap gap-2 mb-4">
           {tags.map((tag: string) => (
