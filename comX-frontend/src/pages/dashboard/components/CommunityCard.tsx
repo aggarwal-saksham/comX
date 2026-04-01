@@ -44,13 +44,13 @@ export default function CommunityCard({
   const navigate = useNavigate();
   const ownerName = owner?.name ?? "Unknown owner";
   const ownerAvatar = owner?.avatar || "https://github.com/shadcn.png";
+  const coverBackground = coverImage && coverImage !== "coverImage"
+    ? { backgroundImage: `url(${coverImage})` }
+    : { background: "linear-gradient(135deg, #0f172a, #2563eb)" };
 
   function redirectToCommunity() {
     navigate(`/community/${id.toString()}`);
   }
-
-  // Hta dena
-  if(coverImage==="coverImage") coverImage="../../public/Community.webp"
 
   return (
     <motion.div
@@ -61,9 +61,7 @@ export default function CommunityCard({
     >
       <div
         className="relative h-48 w-full bg-cover bg-center"
-        style={{
-          backgroundImage: `url(${coverImage})`,
-        }}
+        style={coverBackground}
       />
       <div className="p-4">
         <h3 className="font-semibold text-xl mb-2">{name}</h3>

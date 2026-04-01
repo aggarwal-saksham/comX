@@ -51,7 +51,6 @@ const projectData = {
     startDate: "2024-01-01",
     endDate: "2024-12-31",
     ownerName: "Owner Name",
-    ownerAvatar: "../../../public/Vardaan_Profile.jpg",
     recentActivity: [
       {
         id: 1,
