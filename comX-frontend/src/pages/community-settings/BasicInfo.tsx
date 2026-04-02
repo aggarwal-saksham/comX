@@ -70,7 +70,9 @@ export default function BasicInformation() {
     return <div>Error loading community details.</div>;
   }
 
-  const isOwner = user.user?.id === community.owner?.id;
+  // Community details do not currently include owner metadata.
+  // Keep the delete action available here and rely on the backend's owner check.
+  const canDeleteCommunity = Boolean(user.user?.id);
 
   return (
     <>
@@ -209,7 +211,7 @@ export default function BasicInformation() {
                 >
                   Save Changes
                 </Button>
-                {isOwner && (
+                {canDeleteCommunity && (
                   <AlertDialog>
                     <AlertDialogTrigger asChild>
                       <Button
