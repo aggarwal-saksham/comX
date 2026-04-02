@@ -30,7 +30,12 @@ export default function TaskForProfile() {
   if (profileLoading) return <div>Loading ...</div>;
   if (profileError) return <ErrorPage />;
 
-  const tasks: Task[] = profile.Task;
+  const tasks: Task[] = profile.Task.map((task) => ({
+    id: task.id,
+    title: task.title,
+    status: task.status,
+    date: (task.completedDate ?? task.deadline ?? task.createdAt).slice(0, 10),
+  }));
 
   const filteredTasks = tasks.filter(
     (task) => task.status === activeTab || activeTab === "ALL"

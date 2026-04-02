@@ -23,15 +23,20 @@ import { Progress } from "@/components/ui/progress";
 import ErrorPage from "@/pages/genral/ErrorPage";
 import ProfileAPI from "@/api/profile/ProfileAPI";
 import LogoutAPI from "@/api/auth/LogoutAPI";
+import PersonalInfoSettings from "./Settings/PersonalInfoSettings";
+import { useSelector } from "react-redux";
+import { RootState } from "@/state/store";
 
 export default function PersonalInfo() {
   const { profile, profileLoading, profileError } = ProfileAPI();
   const { handleLogout, logoutPending } = LogoutAPI();
+  const user = useSelector((state: RootState) => state.userDetails);
 
   if (profileLoading) return <div>Loading ...</div>;
   if (profileError) return <ErrorPage />;
 
   const projects = profile.projects.length;
+  const isOwnProfile = user.user?.username === profile.username;
 
   return (
     <Card className="w-full max-w-lg shadow-xl border border-gray-200">
@@ -203,9 +208,13 @@ export default function PersonalInfo() {
         </div>
       </CardContent>
       <CardFooter className="flex justify-between">
-        <Button variant="outline" disabled>
-          Edit Profile (Coming soon)
-        </Button>
+        {isOwnProfile ? (
+          <PersonalInfoSettings profile={profile} />
+        ) : (
+          <Button variant="outline" disabled>
+            Edit Profile
+          </Button>
+        )}
         <Button
           variant="destructive"
           disabled={logoutPending}

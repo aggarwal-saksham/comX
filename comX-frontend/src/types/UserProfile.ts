@@ -51,3 +51,52 @@ export type Member = {
   joinedAt: string;
   avatar: string;
 };
+
+export type PublicProfile = {
+  name: string;
+  email: string;
+  username: string;
+  avatar: string;
+  designation: string;
+  registeredAt: string;
+  bio: string | null;
+  location: string | null;
+  website: string | null;
+  phone: string | null;
+  skills: string[];
+  socialLinks: {
+    twitter?: string;
+    github?: string;
+    linkedin?: string;
+    codechef?: string;
+    codeforces?: string;
+  };
+  followers: Array<{
+    name: string;
+    username: string;
+    avatar: string;
+  }>;
+  following: Array<{
+    name: string;
+    username: string;
+    avatar: string;
+  }>;
+  Task: Array<{
+    id: number;
+    title: string;
+    priority: "LOW" | "MEDIUM" | "HIGH" | "CRITICAL";
+    status: "COMPLETED" | "PENDING" | "INPROGRESS";
+    deadline: string;
+    completedDate: string | null;
+    createdAt: string;
+  }>;
+  projects: Array<{
+    project: {
+      id: number;
+      name: string;
+      description: string;
+      deadline: string;
+      createdAt: string;
+    };
+  }>;
+};
