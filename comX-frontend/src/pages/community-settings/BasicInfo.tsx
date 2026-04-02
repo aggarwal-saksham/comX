@@ -11,9 +11,24 @@ import { Toaster } from "react-hot-toast";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import CommunityAPI from "@/api/community/CommunityAPI";
 import { CommunitySettingsAPI } from "@/api/community/CommunitySettingsAPI";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import DeleteCommunityAPI from "@/api/community/DeleteCommunityAPI";
+import { useSelector } from "react-redux";
+import { RootState } from "@/state/store";
 
 export default function BasicInformation() {
   const { ID } = useParams();
+  const user = useSelector((state: RootState) => state.userDetails);
 
   // State variables
   const coverImage = useRef<HTMLInputElement>(null);
@@ -32,6 +47,7 @@ export default function BasicInformation() {
 
   const { handleEditCommunityBasicInfo, editCommunityBasicInfoPending } =
     CommunitySettingsAPI();
+  const { handleDeleteCommunity, deleteCommunityPending } = DeleteCommunityAPI();
 
   // Update community function
   const handleUpdateCommunity = () => {
@@ -53,6 +69,8 @@ export default function BasicInformation() {
   if (communityError) {
     return <div>Error loading community details.</div>;
   }
+
+  const isOwner = user.user?.id === community.owner?.id;
 
   return (
     <>
@@ -184,12 +202,50 @@ export default function BasicInformation() {
                 Please wait
               </Button>
             ) : (
-              <Button
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white transition-colors duration-300"
-                onClick={handleUpdateCommunity}
-              >
-                Save Changes
-              </Button>
+              <div className="space-y-4">
+                <Button
+                  className="w-full bg-blue-600 hover:bg-blue-700 text-white transition-colors duration-300"
+                  onClick={handleUpdateCommunity}
+                >
+                  Save Changes
+                </Button>
+                {isOwner && (
+                  <AlertDialog>
+                    <AlertDialogTrigger asChild>
+                      <Button
+                        variant="destructive"
+                        className="w-full"
+                        disabled={deleteCommunityPending}
+                      >
+                        {deleteCommunityPending
+                          ? "Deleting Community..."
+                          : "Delete Community"}
+                      </Button>
+                    </AlertDialogTrigger>
+                    <AlertDialogContent>
+                      <AlertDialogHeader>
+                        <AlertDialogTitle>Delete this community?</AlertDialogTitle>
+                        <AlertDialogDescription>
+                          This permanently removes the community and its data. This
+                          action cannot be undone.
+                        </AlertDialogDescription>
+                      </AlertDialogHeader>
+                      <AlertDialogFooter>
+                        <AlertDialogCancel>Cancel</AlertDialogCancel>
+                        <AlertDialogAction
+                          className="bg-red-600 hover:bg-red-700"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            handleDeleteCommunity();
+                          }}
+                        >
+                          Confirm Delete
+                        </AlertDialogAction>
+                      </AlertDialogFooter>
+                    </AlertDialogContent>
+                  </AlertDialog>
+                )}
+              </div>
             )}
           </CardContent>
         </Card>

@@ -22,14 +22,11 @@ import { Separator } from "@/components/ui/separator";
 import { Progress } from "@/components/ui/progress";
 import ErrorPage from "@/pages/genral/ErrorPage";
 import ProfileAPI from "@/api/profile/ProfileAPI";
-import { useDispatch } from "react-redux";
-import { clearUser } from "@/state/userDetails/userDetails";
-import { useNavigate } from "react-router-dom";
+import LogoutAPI from "@/api/auth/LogoutAPI";
 
 export default function PersonalInfo() {
   const { profile, profileLoading, profileError } = ProfileAPI();
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const { handleLogout, logoutPending } = LogoutAPI();
 
   if (profileLoading) return <div>Loading ...</div>;
   if (profileError) return <ErrorPage />;
@@ -211,12 +208,10 @@ export default function PersonalInfo() {
         </Button>
         <Button
           variant="destructive"
-          onClick={() => {
-            dispatch(clearUser());
-            navigate("/login");
-          }}
+          disabled={logoutPending}
+          onClick={() => handleLogout()}
         >
-          Logout
+          {logoutPending ? "Logging out..." : "Logout"}
         </Button>
       </CardFooter>
     </Card>

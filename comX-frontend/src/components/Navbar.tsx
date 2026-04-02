@@ -8,8 +8,8 @@ import { RootState } from "@/state/store";
 import { Avatar } from "./ui/avatar";
 import { AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
 import { Button } from "./ui/button";
-import { clearUser } from "@/state/userDetails/userDetails";
 import { setTab } from "@/state/tab/tabSlice";
+import LogoutAPI from "@/api/auth/LogoutAPI";
 
 function getDesignation(s: string) {
   s;
@@ -58,6 +58,7 @@ export default function Navbar() {
   };
 
   const dispatch = useDispatch();
+  const { handleLogout, logoutPending } = LogoutAPI();
 
   return (
     <nav className="bg-primary p-4 shadow-lg dark:bg-black dark:shadow-[#111]">
@@ -145,9 +146,10 @@ export default function Navbar() {
                 <Button
                   variant="destructive"
                   className="mt-1"
-                  onClick={() => dispatch(clearUser())}
+                  disabled={logoutPending}
+                  onClick={() => handleLogout()}
                 >
-                  Logout
+                  {logoutPending ? "Logging out..." : "Logout"}
                 </Button>
               </>
             )}
