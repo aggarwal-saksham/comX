@@ -7,6 +7,39 @@ This repository contains:
 - `comX-frontend`: React + Vite client
 - `comX-backend`: Express + Prisma API and Socket.IO server
 
+## Screenshots
+
+### Landing Page
+![Landing Page](./screenshots/landing_page.png)
+
+### Signup Page
+![signup Page](./screenshots/signup.png)
+
+
+### Dashboard
+![Dashboard](./screenshots/dashboard.png)
+
+### Project Overview
+![Project General](./screenshots/project_general.png)
+
+### Tasks Management
+![Tasks](./screenshots/tasks.png)
+
+### Project Chat (Real-time)
+![Project Chat](./screenshots/project_chat.png)
+
+### Calendar
+![Calendar](./screenshots/calendar.png)
+
+### Community Calls
+![Calls](./screenshots/call.png)
+
+### Member Management
+![Member Management](./screenshots/member_management.png)
+
+### User Profile
+![Profile](./screenshots/profile.png)
+
 ## Features
 
 - Email/password authentication with OTP verification
