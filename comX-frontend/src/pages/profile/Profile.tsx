@@ -7,28 +7,30 @@ import ComingSoon from "./Components/CommingSoon";
 
 export default function Profile() {
   return (
-    <div className="px-8 py-8 flex gap-8">
-      <div className="min-w-[360px]">
-        <PersonalInfo />
-      </div>
-      <div className="w-full flex flex-col gap-4 bg-none">
-        <div className="flex w-full justify-between">
-          <div className="border border-gray-200 bg-card rounded-lg shadow-xl w-[49%]">
-            <TaskForProfile />
-          </div>
-          <div className="border border-gray-200 bg-card rounded-lg shadow-xl w-[49%]">
-            <PieChartTask />
-          </div>
+    <div className="min-h-screen bg-gray-50/50 dark:bg-background">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 flex flex-col lg:flex-row gap-6 w-full overflow-x-hidden">
+        <div className="w-full lg:w-[320px] shrink-0">
+          <PersonalInfo />
         </div>
-        <div className="w-full shadow-xl rounded-xl">
-          <ImprovedCodeHeatmap />
-        </div>
-        <div className="flex w-full justify-between">
-          <div className="border border-gray-200 bg-card rounded-lg shadow-xl w-[49%] h-[440px]">
-            <FollowerList />
+        <div className="flex-1 flex flex-col gap-6 min-w-0">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
+            <div className="border border-gray-200 bg-card rounded-lg shadow-md overflow-hidden">
+              <TaskForProfile />
+            </div>
+            <div className="border border-gray-200 bg-card rounded-lg shadow-md overflow-hidden">
+              <PieChartTask />
+            </div>
           </div>
-          <div className="border border-gray-200 bg-card rounded-lg shadow-xl w-[49%]">
-            <ComingSoon />
+          <div className="w-full shadow-md rounded-xl border border-gray-200 bg-card overflow-hidden">
+            <ImprovedCodeHeatmap />
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
+            <div className="border border-gray-200 bg-card rounded-lg shadow-md overflow-hidden h-[440px]">
+              <FollowerList />
+            </div>
+            <div className="border border-gray-200 bg-card rounded-lg shadow-md overflow-hidden">
+              <ComingSoon />
+            </div>
           </div>
         </div>
       </div>

@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useEffect, useRef } from "react";
 import {
   Card,
   CardContent,
@@ -21,10 +21,10 @@ interface HeatmapProps {
   description?: string;
 }
 
-const CELL_SIZE = 19;
+const CELL_SIZE = 16;
 const DAYS_IN_WEEK = 7;
 const WEEKS_IN_YEAR = 53;
-const MARGIN_LEFT = 75;
+const MARGIN_LEFT = 35;
 
 const monthNames = [
   "Jan",
@@ -43,8 +43,9 @@ const monthNames = [
 const weekdayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
 const CustomHeatmap = ({ data }: { data: ContributionData[] }) => {
+  const maxCount = Math.max(...data.map((d) => d.count), 1);
   const colorScale = scaleLinear<number>()
-    .domain([0, Math.max(...data.map((d) => d.count))])
+    .domain([1, maxCount])
     .range([0, 1]);
 
   const startDate = data[0].date;
@@ -71,16 +72,21 @@ const CustomHeatmap = ({ data }: { data: ContributionData[] }) => {
     return labels;
   }, [startDate]);
 
+  const getCellColor = (count: number) => {
+    if (count === 0) return "#ebedf0";
+    return interpolateGreens(0.35 + 0.65 * colorScale(count));
+  };
+
   return (
     <div
       style={{
         display: "grid",
         gridTemplateColumns: `repeat(${WEEKS_IN_YEAR + 1}, ${CELL_SIZE}px)`,
         gridTemplateRows: `repeat(${DAYS_IN_WEEK + 2}, ${CELL_SIZE}px)`,
-        gap: "2px",
+        gap: "3px",
         position: "relative",
-        width: `${(WEEKS_IN_YEAR + 1) * CELL_SIZE + MARGIN_LEFT}px`,
-        height: `${(DAYS_IN_WEEK + 2) * CELL_SIZE}px`,
+        minWidth: `${(WEEKS_IN_YEAR + 1) * (CELL_SIZE + 3) + MARGIN_LEFT}px`,
+        height: `${(DAYS_IN_WEEK + 2) * (CELL_SIZE + 3)}px`,
       }}
     >
       {/* Month labels */}
@@ -90,27 +96,14 @@ const CustomHeatmap = ({ data }: { data: ContributionData[] }) => {
           style={{
             gridColumnStart: Math.floor(month.x / CELL_SIZE) + 2,
             gridRowStart: 1,
-            fontSize: "12px",
+            fontSize: "11px",
             textAlign: "left",
+            color: "#6e7681",
           }}
         >
           {month.label}
         </div>
       ))}
-      <div
-        key={12}
-        style={{
-          gridColumnStart:
-            Math.floor(
-              (monthLabels[0].x + monthLabels[11].x + 25) / CELL_SIZE
-            ) + 2,
-          gridRowStart: 1,
-          fontSize: "12px",
-          textAlign: "left",
-        }}
-      >
-        {monthLabels[0].label}
-      </div>
 
       {/* Weekday labels */}
       {weekdayNames.map((day, index) => (
@@ -119,8 +112,10 @@ const CustomHeatmap = ({ data }: { data: ContributionData[] }) => {
           style={{
             gridColumnStart: 1,
             gridRowStart: index + 2,
-            fontSize: "12px",
+            fontSize: "11px",
             textAlign: "right",
+            paddingRight: "6px",
+            color: "#6e7681",
           }}
         >
           {day}
@@ -135,18 +130,16 @@ const CustomHeatmap = ({ data }: { data: ContributionData[] }) => {
           <div
             key={day.date.toISOString()}
             style={{
-              gridColumnStart: col + 3,
+              gridColumnStart: col + 2,
               gridRowStart: row + 2,
-              width: `${CELL_SIZE - 2}px`,
-              height: `${CELL_SIZE - 2}px`,
-              backgroundColor: interpolateGreens(colorScale(day.count)),
-              borderRadius: "3px",
+              width: `${CELL_SIZE}px`,
+              height: `${CELL_SIZE}px`,
+              backgroundColor: getCellColor(day.count),
+              borderRadius: "2px",
               textAlign: "center",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              fontSize: "10px",
-              color: "#fff",
               cursor: "pointer",
             }}
             title={`${day.date.toDateString()}: ${day.count} contribution${
@@ -164,20 +157,33 @@ export default function ImprovedCodeHeatmap({
   description = "Visualization of your coding activity over the past year",
 }: HeatmapProps) {
   const { profile, profileLoading, profileError } = ProfileAPI();
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const data = useMemo(() => {
+    if (!profile || !profile.Task) return [];
+    return generateSampleData(365, profile.Task);
+  }, [profile]);
+
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollLeft = scrollRef.current.scrollWidth;
+    }
+  }, [data]);
 
   if (profileLoading) return <div>Loading ...</div>;
   if (profileError) return <ErrorPage />;
 
-  const data = generateSampleData(365, profile.Task);
-
   return (
-    <Card className="w-full mx-auto">
-      <CardHeader>
-        <CardTitle>{title}</CardTitle>
-        <CardDescription>{description}</CardDescription>
+    <Card className="w-full border-0 shadow-none">
+      <CardHeader className="pb-3">
+        <CardTitle className="text-lg font-semibold">{title}</CardTitle>
+        <CardDescription className="text-sm">{description}</CardDescription>
       </CardHeader>
       <CardContent>
-        <div className="w-full h-auto">
+        <div
+          ref={scrollRef}
+          className="w-full overflow-x-auto overflow-y-hidden pb-3 pt-1 select-none"
+        >
           <CustomHeatmap data={data} />
         </div>
       </CardContent>

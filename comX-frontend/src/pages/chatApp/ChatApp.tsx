@@ -6,12 +6,11 @@ import { Input } from "@/components/ui/input";
 import { useSelector } from "react-redux";
 import { RootState } from "@/state/store";
 import useSocket from "@/hooks/useSocket";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useDebugger } from "@/hooks/useDebugger";
 import ProjectAPI from "@/api/project/ProjectAPI";
 import ErrorPage from "../genral/ErrorPage";
-import { Avatar } from "@/components/ui/avatar";
-import { AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export default function ChatApp() {
   const { projectId } = useParams();
@@ -105,40 +104,41 @@ export default function ChatApp() {
                         : "justify-start"
                     } mb-4`}
                   >
-                    <motion.div
-                      className={`flex gap-2 ${
-                        message.senderId === user.user!.id && "flex-row-reverse"
-                      }`}
-                    >
-                      <Avatar className="mt-2">
-                        <AvatarImage
-                          src={
-                            members.find(
-                              (item: { id: number }) =>
-                                item.id === message.senderId
-                            ).avatar
-                          }
-                        />
-                        <AvatarFallback>CN</AvatarFallback>
-                      </Avatar>
-                      <div
-                        className={`max-w-xs px-4 py-2 rounded-lg ${
-                          message.senderId === user.user!.id
-                            ? "bg-blue-500 text-gray-200"
-                            : "bg-gray-200 text-gray-800"
-                        }`}
-                      >
-                        <p className="font-semibold">
-                          {
-                            members.find(
-                              (item: { id: number }) =>
-                                item.id === message.senderId
-                            ).name
-                          }
-                        </p>
-                        <p>{message.content}</p>
-                      </div>
-                    </motion.div>
+                    {(() => {
+                      const sender = members.find(
+                        (item: { id: number; username?: string; avatar?: string; name?: string }) =>
+                          item.id === message.senderId
+                      );
+                      const profilePath = sender?.username ? `/profile/${sender.username}` : "#";
+                      return (
+                        <motion.div
+                          className={`flex gap-2 ${
+                            message.senderId === user.user!.id && "flex-row-reverse"
+                          }`}
+                        >
+                          <Link to={profilePath} className="mt-2 shrink-0 hover:opacity-80 transition-opacity">
+                            <Avatar>
+                              <AvatarImage src={sender?.avatar || "https://github.com/shadcn.png"} />
+                              <AvatarFallback>
+                                {sender?.name ? sender.name.slice(0, 2).toUpperCase() : "CN"}
+                              </AvatarFallback>
+                            </Avatar>
+                          </Link>
+                          <div
+                            className={`max-w-xs px-4 py-2 rounded-lg ${
+                              message.senderId === user.user!.id
+                                ? "bg-blue-500 text-gray-200"
+                                : "bg-gray-200 text-gray-800"
+                            }`}
+                          >
+                            <Link to={profilePath} className="font-semibold hover:underline block text-sm">
+                              {sender?.name || "User"}
+                            </Link>
+                            <p>{message.content}</p>
+                          </div>
+                        </motion.div>
+                      );
+                    })()}
                   </motion.div>
                   <div
                     className={`w-full text-xs relative bottom-3 ${

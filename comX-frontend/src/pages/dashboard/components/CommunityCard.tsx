@@ -66,15 +66,23 @@ export default function CommunityCard({
       <div className="p-4">
         <h3 className="font-semibold text-xl mb-2">{name}</h3>
         <p className="text-sm text-gray-600 mb-4">{description}</p>
-        <div className="flex items-center mb-4">
+        <div
+          className="flex items-center mb-4 cursor-pointer hover:opacity-80 transition-opacity w-fit"
+          onClick={(e) => {
+            e.stopPropagation();
+            if (owner?.username) {
+              navigate(`/profile/${owner.username}`);
+            }
+          }}
+        >
           <img
             src={ownerAvatar}
             alt={ownerName}
             width={40}
             height={40}
-            className="rounded-full mr-2"
+            className="rounded-full mr-2 object-cover w-10 h-10 border border-gray-200"
           />
-          <span className="text-sm text-gray-700">Founded by {ownerName}</span>
+          <span className="text-sm text-gray-700 font-medium">Founded by {ownerName}</span>
         </div>
         <div className="flex flex-wrap gap-2 mb-4">
           {tags.map((tag: string) => (

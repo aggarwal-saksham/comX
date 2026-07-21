@@ -1,5 +1,5 @@
 import { clearUser } from "@/state/userDetails/userDetails";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
@@ -12,32 +12,25 @@ export default function LogoutAPI() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
-  const { mutateAsync, isPending } = useMutation({
-    mutationFn: async () => {
-      const response = await axios.get(`${backend_url}/auth/logout`, {
+  const handleLogout = () => {
+    // Immediately clear local state and navigate to prevent any UI hang
+    dispatch(clearUser());
+    queryClient.clear();
+    toast.success("Logged out successfully");
+    navigate("/login");
+
+    // Fire backend logout asynchronously
+    axios
+      .get(`${backend_url}/auth/logout`, {
         withCredentials: true,
+      })
+      .catch(() => {
+        // Silently catch error since user is already logged out locally
       });
-      return response.data;
-    },
-    onSuccess() {
-      dispatch(clearUser());
-      queryClient.clear();
-      toast.success("Logged out successfully");
-      navigate("/login");
-    },
-    onError(error: unknown) {
-      if (axios.isAxiosError(error)) {
-        const errorMessage =
-          error.response?.data?.message || "Unable to log out right now.";
-        toast.error(errorMessage);
-      } else {
-        toast.error("Unable to log out right now.");
-      }
-    },
-  });
+  };
 
   return {
-    handleLogout: mutateAsync,
-    logoutPending: isPending,
+    handleLogout,
+    logoutPending: false,
   };
 }

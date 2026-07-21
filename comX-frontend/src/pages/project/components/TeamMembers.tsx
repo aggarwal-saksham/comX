@@ -12,6 +12,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/state/store";
 import TeamMembersSettings from "./project-settings/TeamMembersSettings";
 import ProjectAPI from "@/api/project/ProjectAPI";
+import { Link } from "react-router-dom";
 
 export default function TeamMembers() {
 
@@ -57,19 +58,20 @@ export default function TeamMembers() {
               designation: string;
               name: string;
             }) => (
-              <div
+              <Link
+                to={item.username ? `/profile/${item.username}` : "#"}
                 key={item.email}
                 className="flex items-center gap-3 p-4 bg-gray-50 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200"
               >
-                <Avatar className="w-12 h-12 border border-gray-200 rounded-full overflow-hidden">
+                <Avatar className="w-12 h-12 border border-gray-200 rounded-full overflow-hidden shrink-0">
                   <AvatarImage src={item.avatar} />
-                  <AvatarFallback>{item.name[0]}</AvatarFallback>
+                  <AvatarFallback>{item.name ? item.name[0] : "U"}</AvatarFallback>
                 </Avatar>
-                <div className="flex flex-col">
-                  <h1 className="font-medium text-gray-800">{item.name}</h1>
-                  <p className="text-sm text-gray-500">{item.designation}</p>
+                <div className="flex flex-col overflow-hidden">
+                  <h1 className="font-medium text-gray-800 truncate">{item.name}</h1>
+                  <p className="text-sm text-gray-500 truncate">{item.designation}</p>
                 </div>
-              </div>
+              </Link>
             )
           )}
         </div>

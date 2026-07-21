@@ -11,5 +11,6 @@ export type Community = {
     email: string;
     id: number;
     name: string;
+    username?: string;
   } | null;
 };
