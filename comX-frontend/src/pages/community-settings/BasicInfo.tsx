@@ -25,6 +25,7 @@ import {
 import DeleteCommunityAPI from "@/api/community/DeleteCommunityAPI";
 import { useSelector } from "react-redux";
 import { RootState } from "@/state/store";
+import LoadingSpinner from "@/components/ui/LoadingSpinner";
 
 export default function BasicInformation() {
   const { ID } = useParams();
@@ -62,7 +63,7 @@ export default function BasicInformation() {
 
   // Show loading state
   if (communityLoading) {
-    return <div>Loading . . .</div>;
+    return <LoadingSpinner message="Loading community information..." />;
   }
 
   // Handle error state

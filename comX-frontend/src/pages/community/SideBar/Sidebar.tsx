@@ -16,6 +16,7 @@ import ProjectList from "./ProjectList";
 import ProjectListForTasks from "./Task-ProjectList";
 import AllProjectAPI from "@/api/project/AllProjectsAPI";
 import CallList from "./CallList";
+import LoadingSpinner from "@/components/ui/LoadingSpinner";
 
 const backend_url = import.meta.env.VITE_BACKEND_URL;
 
@@ -80,7 +81,11 @@ const Sidebar = React.memo(function Sidebar() {
   }, [activeServer, dispatch, navigate, projects, taskList,projectsLoading]);
 
   if (projectsLoading) {
-    return <div>Loading ...</div>;
+    return (
+      <div className="w-[72px] h-screen bg-gray-100 flex flex-col items-center justify-center p-2">
+        <LoadingSpinner message="" />
+      </div>
+    );
   }
 
   if (projectsError || taskError) {

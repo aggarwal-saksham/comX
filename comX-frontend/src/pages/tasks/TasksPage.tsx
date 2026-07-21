@@ -10,6 +10,7 @@ import { useParams } from "react-router-dom";
 import ErrorPage from "../genral/ErrorPage";
 import { Toaster } from "react-hot-toast";
 import TasksAPI from "@/api/tasks/TasksAPI";
+import LoadingSpinner from "@/components/ui/LoadingSpinner";
 
 export default function TaskPage() {
   const { projectId } = useParams();
@@ -43,7 +44,7 @@ export default function TaskPage() {
   if (projectId === undefined) return <div>Hello World</div>;
 
   if (tasksLoading) {
-    return <div>Loading ...</div>;
+    return <LoadingSpinner message="Loading task board..." />;
   }
 
   if (tasksError) {

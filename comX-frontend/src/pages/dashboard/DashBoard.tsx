@@ -12,6 +12,7 @@ import CommunityCard from "./components/CommunityCard";
 import CreateCommunity from "./components/CreateCommunity";
 import JoinCommunity from "./components/JoinCommunity";
 import LastTask from "./components/Last-Task";
+import LoadingSpinner from "@/components/ui/LoadingSpinner";
 
 const backend_url = import.meta.env.VITE_BACKEND_URL;
 
@@ -36,8 +37,8 @@ export default function Dashboard() {
     staleTime: Infinity,
   });
 
-  if(isPending){
-    return <div>Loading ...</div>
+  if (isPending) {
+    return <LoadingSpinner message="Fetching your communities..." />;
   }
 
   if(isError){

@@ -10,7 +10,6 @@ import { Months } from "@/lib/DummyData";
 import { setYear } from "@/state/calendar/year";
 import { setActiveChannel } from "@/state/sidebar/activeChannel";
 import { RootState } from "@/state/store";
-import { ScrollArea } from "@radix-ui/react-scroll-area";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CommunityHeader from "./ComunityHeader";
@@ -36,11 +35,11 @@ export default function CalendarList() {
 
   return (
     <>
-      <div className="w-60 bg-white flex flex-col border-r">
+      <div className="w-60 bg-white flex flex-col h-full border-r overflow-hidden">
         <CommunityHeader />
-        <div className="flex justify-center items-center mt-2 w-full">
-          <Select value={year} onValueChange={setYear}>
-            <SelectTrigger className="w-[90%]">
+        <div className="flex justify-center items-center mt-2 w-full px-4">
+          <Select value={year} onValueChange={(v) => dispatch(setYear(v))}>
+            <SelectTrigger className="w-full">
               <SelectValue placeholder="Select a year" />
             </SelectTrigger>
             <SelectContent>
@@ -56,7 +55,7 @@ export default function CalendarList() {
             </SelectContent>
           </Select>
         </div>
-        <ScrollArea className="flex-grow">
+        <div className="flex-grow overflow-y-auto min-h-0 py-2">
           {groups.map((category) => (
             <div key={category.id} className="m-2 mx-4">
               <button
@@ -72,7 +71,7 @@ export default function CalendarList() {
               </button>
             </div>
           ))}
-        </ScrollArea>
+        </div>
         <UserControlBox />
       </div>
     </>

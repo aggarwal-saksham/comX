@@ -14,15 +14,14 @@ import TeamMembersSettings from "./project-settings/TeamMembersSettings";
 import ProjectAPI from "@/api/project/ProjectAPI";
 import { Link } from "react-router-dom";
 
+import LoadingSpinner from "@/components/ui/LoadingSpinner";
+
 export default function TeamMembers() {
-
   const user = useSelector((state: RootState) => state.userDetails);
-
   const { project, projectLoading, projectError } = ProjectAPI();
-  
 
   if (projectLoading) {
-    return <div>Loading ...</div>;
+    return <LoadingSpinner message="Loading team members..." />;
   }
 
   if (projectError) {

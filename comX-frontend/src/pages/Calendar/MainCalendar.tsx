@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/state/store";
 import CalendarAPI from "@/api/calendar/CalendarAPI";
 import ErrorPage from "../genral/ErrorPage";
+import LoadingSpinner from "@/components/ui/LoadingSpinner";
 
 interface CalendarEvent {
   id: string;
@@ -51,7 +52,8 @@ export default function MainCalendar() {
   // if(!tasksLoading) setEvents(tasks);
   // },[tasksLoading,tasks])
 
-  if (tasksLoading) return <div>Loading ...</div>;
+  if (tasksLoading)
+    return <LoadingSpinner message="Loading calendar schedule..." />;
   if (tasksError) return <ErrorPage />;
 
   const events: CalendarEvent[] = Array.isArray(tasks) ? tasks : [];

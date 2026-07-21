@@ -11,6 +11,7 @@ import { useDebugger } from "@/hooks/useDebugger";
 import ProjectAPI from "@/api/project/ProjectAPI";
 import ErrorPage from "../genral/ErrorPage";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import LoadingSpinner from "@/components/ui/LoadingSpinner";
 
 export default function ChatApp() {
   const { projectId } = useParams();
@@ -71,7 +72,8 @@ export default function ChatApp() {
 
   useDebugger(messages);
 
-  if (projectLoading) return <div>Loading ...</div>;
+  if (projectLoading)
+    return <LoadingSpinner message="Loading chat messages & project team..." />;
   if (projectError) return <ErrorPage />;
 
   const members = project.projectMembers;

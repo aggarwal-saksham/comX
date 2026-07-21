@@ -13,6 +13,7 @@ import ProjectOverviewSettings from "./project-settings/ProjectOverviewSettings"
 import { useSelector } from "react-redux";
 import { RootState } from "@/state/store";
 import ProjectAPI from "@/api/project/ProjectAPI";
+import LoadingSpinner from "@/components/ui/LoadingSpinner";
 
 export default function ProjectOverview() {
 
@@ -22,7 +23,7 @@ export default function ProjectOverview() {
   
 
   if (projectLoading) {
-    return <div>Loading ...</div>;
+    return <LoadingSpinner message="Loading project overview..." />;
   }
 
   if (projectError) {

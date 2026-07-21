@@ -27,12 +27,15 @@ import PersonalInfoSettings from "./Settings/PersonalInfoSettings";
 import { useSelector } from "react-redux";
 import { RootState } from "@/state/store";
 
+import LoadingSpinner from "@/components/ui/LoadingSpinner";
+
 export default function PersonalInfo() {
   const { profile, profileLoading, profileError } = ProfileAPI();
   const { handleLogout, logoutPending } = LogoutAPI();
   const user = useSelector((state: RootState) => state.userDetails);
 
-  if (profileLoading) return <div>Loading ...</div>;
+  if (profileLoading)
+    return <LoadingSpinner message="Loading user profile..." />;
   if (profileError) return <ErrorPage />;
 
   const projects = profile.projects.length;
