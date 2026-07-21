@@ -89,23 +89,29 @@ function LoginInForm() {
 
       <form className="my-8" onSubmit={handleSubmit}>
         <LabelInputContainer className="mb-4">
-          <Label htmlFor="email">Username/Email Address</Label>
+          <Label htmlFor="email">
+            Username/Email Address <span className="text-red-500">*</span>
+          </Label>
           <Input
             id="loginDetails"
             placeholder="saksham@example.com or sakshamaggarwal"
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            required
           />
         </LabelInputContainer>
         <LabelInputContainer className="mb-4">
-          <Label htmlFor="password">Password</Label>
+          <Label htmlFor="password">
+            Password <span className="text-red-500">*</span>
+          </Label>
           <Input
             id="password"
             placeholder="••••••••"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            required
           />
         </LabelInputContainer>
 

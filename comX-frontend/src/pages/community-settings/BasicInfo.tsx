@@ -93,7 +93,7 @@ export default function BasicInformation() {
                 className="flex items-center text-sm font-medium"
               >
                 <Users className="mr-2 h-4 w-4" />
-                Community Name
+                Community Name <span className="text-red-500 ml-1">*</span>
               </Label>
               <Input
                 id="communityName"
@@ -101,6 +101,7 @@ export default function BasicInformation() {
                 className="w-full transition-all duration-300 focus:ring-2 focus:ring-blue-500"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
+                required
               />
             </div>
 
@@ -110,7 +111,7 @@ export default function BasicInformation() {
                 className="flex items-center text-sm font-medium"
               >
                 <FileText className="mr-2 h-4 w-4" />
-                Community Description
+                Community Description <span className="text-red-500 ml-1">*</span>
               </Label>
               <Textarea
                 id="communityDescription"

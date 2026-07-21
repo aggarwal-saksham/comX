@@ -73,17 +73,22 @@ const CreateProjectComponent: React.FC = () => {
 
       <div className="flex w-full items-center justify-between">
         <div className="space-y-4 w-[49%]">
-          <Label htmlFor="projectName">Project Name</Label>
+          <Label htmlFor="projectName">
+            Project Name <span className="text-red-500">*</span>
+          </Label>
           <Input name="projectName" placeholder="Enter project name" required />
         </div>
         <CreateProjectDeadline deadline={deadline} setDeadline={setDeadline} />
       </div>
 
       <div className="space-y-4 w-full">
-        <Label htmlFor="projectDescription">Project Description</Label>
+        <Label htmlFor="projectDescription">
+          Project Description <span className="text-red-500">*</span>
+        </Label>
         <Textarea
           name="projectDescription"
           placeholder="Enter project description"
+          required
         />
       </div>
 

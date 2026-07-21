@@ -87,7 +87,9 @@ export default function SignUpFormPage1({
 
       <form className="my-8" onSubmit={handleSubmit(onSubmit)}>
         <LabelInputContainer className="mb-4">
-          <Label htmlFor="name">Name</Label>
+          <Label htmlFor="name">
+            Name <span className="text-red-500">*</span>
+          </Label>
           <Input
             id="name"
             placeholder="Saksham Aggarwal"
@@ -101,7 +103,9 @@ export default function SignUpFormPage1({
           )}
         </LabelInputContainer>
         <LabelInputContainer className="mb-4">
-          <Label htmlFor="username">Username</Label>
+          <Label htmlFor="username">
+            Username <span className="text-red-500">*</span>
+          </Label>
           <Input
             id="username"
             placeholder="sakshamaggarwal"
@@ -115,7 +119,9 @@ export default function SignUpFormPage1({
           )}
         </LabelInputContainer>
         <LabelInputContainer className="mb-4">
-          <Label htmlFor="email">Email Address</Label>
+          <Label htmlFor="email">
+            Email Address <span className="text-red-500">*</span>
+          </Label>
           <Input
             id="email"
             placeholder="saksham@example.com"
@@ -137,7 +143,9 @@ export default function SignUpFormPage1({
           />
         </LabelInputContainer>
         <LabelInputContainer className="mb-4">
-          <Label htmlFor="password">Password</Label>
+          <Label htmlFor="password">
+            Password <span className="text-red-500">*</span>
+          </Label>
           <Input
             id="password"
             placeholder="••••••••"
@@ -151,7 +159,9 @@ export default function SignUpFormPage1({
           )}
         </LabelInputContainer>
         <LabelInputContainer className="mb-4">
-          <Label htmlFor="password">Confirm Password</Label>
+          <Label htmlFor="password">
+            Confirm Password <span className="text-red-500">*</span>
+          </Label>
           <Input
             id="ConfirmPassword"
             placeholder="••••••••"
@@ -165,7 +175,9 @@ export default function SignUpFormPage1({
           )}
         </LabelInputContainer>
         <LabelInputContainer className="mb-4">
-          <Label htmlFor="password">Designation</Label>
+          <Label htmlFor="password">
+            Designation <span className="text-red-500">*</span>
+          </Label>
           <ItemPicker itemList={designation} 
           value={post} setValue={setPost}
            />

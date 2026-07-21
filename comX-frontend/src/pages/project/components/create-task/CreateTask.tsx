@@ -124,7 +124,9 @@ export default function CreateTask({ milestone }: { milestone: string }) {
           </AlertDialogHeader>
           <form onSubmit={handleSubmit}>
             <LabelInputContainer className="mb-4">
-              <Label htmlFor="task-title">Title</Label>
+              <Label htmlFor="task-title">
+                Title <span className="text-red-500">*</span>
+              </Label>
               <Input
                 id="task-title"
                 name="task-title"
@@ -133,7 +135,9 @@ export default function CreateTask({ milestone }: { milestone: string }) {
               />
             </LabelInputContainer>
             <LabelInputContainer className="mb-4">
-              <Label htmlFor="task-description">Description</Label>
+              <Label htmlFor="task-description">
+                Description <span className="text-red-500">*</span>
+              </Label>
               <Textarea
                 id="task-description"
                 name="task-description"
@@ -150,15 +154,21 @@ export default function CreateTask({ milestone }: { milestone: string }) {
               />
             </LabelInputContainer>
             <LabelInputContainer className="mb-4">
-              <Label htmlFor="task-start-date">Start Date</Label>
+              <Label htmlFor="task-start-date">
+                Start Date <span className="text-red-500">*</span>
+              </Label>
               <DatePicker date={start} setDate={setStart} />
             </LabelInputContainer>
             <LabelInputContainer className="mb-4">
-              <Label htmlFor="task-end-date">End Date</Label>
+              <Label htmlFor="task-end-date">
+                End Date <span className="text-red-500">*</span>
+              </Label>
               <DatePicker date={end} setDate={setEnd} />
             </LabelInputContainer>
             <LabelInputContainer className="mb-4">
-              <Label htmlFor="task-assignee">Assignee</Label>
+              <Label htmlFor="task-assignee">
+                Assignee <span className="text-red-500">*</span>
+              </Label>
               <ItemPicker
                 itemList={project.projectMembers.map((item: Member) => {
                   return { id: item.id, value: item.name };
@@ -176,7 +186,9 @@ export default function CreateTask({ milestone }: { milestone: string }) {
               />
             </LabelInputContainer>
             <LabelInputContainer className="mb-4">
-              <Label htmlFor="task-priority">Priority</Label>
+              <Label htmlFor="task-priority">
+                Priority <span className="text-red-500">*</span>
+              </Label>
               <div className="flex gap-2">
                 <Button
                   className={`${
