@@ -3,9 +3,9 @@ import Sidebar from "./SideBar/Sidebar";
 
 function CommunityLayout() {
   return (
-    <div className="flex">
+    <div className="flex h-screen w-full overflow-hidden bg-white">
       <Sidebar />
-      <div className="bg-white w-full h-screen flex justify-center items-center">
+      <div className="flex-1 h-screen overflow-y-auto w-full bg-white">
         <Outlet />
       </div>
     </div>

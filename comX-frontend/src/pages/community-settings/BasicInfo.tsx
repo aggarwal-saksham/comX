@@ -76,17 +76,17 @@ export default function BasicInformation() {
 
   return (
     <>
-      <div className="w-full">
-        <motion.div variants={itemAnimation} className="text-center mb-12">
-          <h1 className="text-4xl font-extrabold text-blue-600 leading-snug">
+      <div className="w-full max-w-4xl mx-auto px-4 py-8 sm:px-8 sm:py-12">
+        <motion.div variants={itemAnimation} className="text-center mb-8">
+          <h1 className="text-3xl font-extrabold text-blue-600 leading-snug">
             Basic Information
           </h1>
-          <p className="mt-2 text-lg text-gray-500">
+          <p className="mt-2 text-base text-gray-500">
             Customize and manage your community experience.
           </p>
         </motion.div>
-        <Card className="w-full h-full rounded-none border-none flex items-center">
-          <CardContent className="space-y-6 w-full">
+        <Card className="w-full shadow-sm border border-gray-200 rounded-xl bg-white p-6 sm:p-8">
+          <CardContent className="space-y-6 w-full p-0">
             <div className="space-y-2">
               <Label
                 htmlFor="communityName"

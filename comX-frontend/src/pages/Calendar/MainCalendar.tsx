@@ -93,14 +93,14 @@ export default function MainCalendar() {
           return (
             <motion.div
               key={day.toISO()}
-              className="p-2 border border-gray-200 rounded-lg aspect-square"
-              whileHover={{ scale: 1.05 }}
+              className="p-2 border border-gray-200 rounded-lg min-h-[90px] bg-white shadow-xs"
+              whileHover={{ scale: 1.02 }}
             >
               <div
-                className={`text-center ${
+                className={`text-center text-sm ${
                   day.hasSame(DateTime.now(), "day")
-                    ? "font-bold text-blue-500"
-                    : ""
+                    ? "font-bold text-blue-600 bg-blue-50 rounded-full w-7 h-7 flex items-center justify-center mx-auto"
+                    : "text-gray-700"
                 }`}
               >
                 {day.day}
@@ -108,8 +108,8 @@ export default function MainCalendar() {
               {dayEvents.map((event) => (
                 <motion.div
                   key={event.id}
-                  className={`${event.color} text-white text-xs p-1 mt-1 rounded-md cursor-pointer`}
-                  whileHover={{ scale: 1.1 }}
+                  className={`${event.color} text-white text-xs p-1 mt-1 rounded-md cursor-pointer truncate`}
+                  whileHover={{ scale: 1.05 }}
                 >
                   {event.title}
                 </motion.div>
@@ -122,17 +122,15 @@ export default function MainCalendar() {
   };
 
   return (
-    <div className="flex flex-col h-screen text-black w-full">
-      <main className="flex-grow overflow-scroll no-scrollbar w-full pb-8 ">
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="w-full px-4"
-        >
-          {renderCalendar()}
-        </motion.div>
-      </main>
+    <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 py-6 text-black flex flex-col pb-12">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4 }}
+        className="w-full"
+      >
+        {renderCalendar()}
+      </motion.div>
     </div>
   );
 }
