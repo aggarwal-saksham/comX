@@ -11,6 +11,10 @@ import { ItemPicker } from "@/components/Item-Picker";
 import { designation } from "@/lib/destignation";
 import { Button } from "@/components/ui/button";
 import { ReloadIcon } from "@radix-ui/react-icons";
+import { useGoogleLogin } from "@react-oauth/google";
+import { IconBrandGoogle } from "@tabler/icons-react";
+import { useDispatch } from "react-redux";
+import { setUser } from "@/state/userDetails/userDetails";
 import { useNavigate } from "react-router-dom";
 import { BottomGradient, LabelInputContainer } from "./SignUpExtraComponenets";
 
@@ -25,6 +29,52 @@ export default function SignUpFormPage1({
   email: React.MutableRefObject<HTMLInputElement>;
 }) {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const { mutateAsync: googleLoginMutation, isPending: isGooglePending } = useMutation({
+    mutationFn: async (accessToken: string) => {
+      const response = await axios.post(
+        `${backend_url}/auth/google`,
+        { token: accessToken },
+        {
+          withCredentials: true,
+        }
+      );
+      return response.data;
+    },
+    onSuccess(data) {
+      dispatch(
+        setUser({
+          name: data.data.name,
+          isLoggedIn: true,
+          email: data.data.email,
+          designation: data.data.designation,
+          username: data.data.username,
+          id: data.data.id,
+          avatar: data.data.avatar,
+        })
+      );
+      toast.success("Signed up & Logged in with Google!");
+      navigate("/dashboard", { replace: true });
+    },
+    onError(error: unknown) {
+      if (axios.isAxiosError(error)) {
+        toast.error(error.response?.data?.message || "Google Sign-In failed.");
+      } else {
+        toast.error("Google Sign-In failed. Please try again.");
+      }
+    },
+  });
+
+  const handleGoogleLogin = useGoogleLogin({
+    onSuccess: (tokenResponse) => {
+      googleLoginMutation(tokenResponse.access_token);
+    },
+    onError: (errorResponse) => {
+      console.error(errorResponse);
+      toast.error("Google Sign-In failed.");
+    },
+  });
   const {
     register,
     handleSubmit,
@@ -200,6 +250,23 @@ export default function SignUpFormPage1({
             <BottomGradient />
           </button>
         )}
+
+        <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-6 h-[1px] w-full" />
+
+        <div className="flex flex-col space-y-4">
+          <button
+            className="relative group/btn flex space-x-2 items-center justify-center px-4 w-full text-black rounded-md h-10 font-medium shadow-input bg-gray-50 dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_var(--neutral-800)] disabled:opacity-50"
+            type="button"
+            onClick={() => handleGoogleLogin()}
+            disabled={isGooglePending}
+          >
+            <IconBrandGoogle className="h-4 w-4 text-neutral-800 dark:text-neutral-300" />
+            <span className="text-neutral-700 dark:text-neutral-300 text-sm">
+              {isGooglePending ? "Connecting to Google..." : "Continue with Google"}
+            </span>
+            <BottomGradient />
+          </button>
+        </div>
       </form>
       <Toaster />
     </div>
