@@ -17,6 +17,7 @@ import Admin_MemberManagement from "./MemberManagement/Admin-MemberManagement";
 import Invite_MemberManagement from "./MemberManagement/Invite-MemberManagement";
 import Ban_MemberManagement from "./MemberManagement/Ban-MemberManagement";
 import CommunityMembersAPI from "@/api/community/CommunityMembersAPI";
+import LoadingSpinner from "@/components/ui/LoadingSpinner";
 
 const itemAnimation = {
   hidden: { opacity: 0, y: 20 },
@@ -58,7 +59,7 @@ export default function MemberManagement() {
   };
 
   if (communityMembersLoading) {
-    return <div>Loading...</div>;
+    return <LoadingSpinner message="Loading community members..." />;
   }
 
   // Handle error case

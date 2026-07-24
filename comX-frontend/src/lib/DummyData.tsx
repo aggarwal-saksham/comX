@@ -1,14 +1,29 @@
 import { LockClosedIcon } from "@radix-ui/react-icons";
-import { Hash, Info, Users, Bell, Calendar, Settings, FolderKanban, CheckCheck, Video, MessageCircleCode } from "lucide-react";
 import {
-  CalendarDays,
-  CloudDrizzle,
-  CloudSnow,
+  Hash,
+  Info,
+  Users,
+  Bell,
+  Calendar,
+  Settings,
+  FolderKanban,
+  CheckCheck,
+  Video,
+  MessageCircleCode,
+} from "lucide-react";
+import {
+  Snowflake,
+  Heart,
+  Sprout,
+  Umbrella,
+  Flower,
   Sun,
-  CloudSun,
-  Leaf,
-  Flower2,
+  Palmtree,
   Flame,
+  GraduationCap,
+  Ghost,
+  Gift,
+  TreePine,
 } from "lucide-react";
 
 export const Server = [
@@ -93,62 +108,62 @@ export const Months = [
   {
     id: 1,
     name: "January",
-    link: <CloudSnow className="w-6 h-6 text-gray-500" />,
+    link: <Snowflake className="w-6 h-6 text-sky-400" />,
   },
   {
     id: 2,
     name: "February",
-    link: <CalendarDays className="w-6 h-6 text-purple-500" />,
+    link: <Heart className="w-6 h-6 text-rose-500" />,
   },
   {
     id: 3,
     name: "March",
-    link: <Flower2 className="w-6 h-6 text-green-600" />,
+    link: <Sprout className="w-6 h-6 text-emerald-500" />,
   },
   {
     id: 4,
     name: "April",
-    link: <CloudDrizzle className="w-6 h-6 text-blue-400" />,
+    link: <Umbrella className="w-6 h-6 text-cyan-500" />,
   },
   {
     id: 5,
     name: "May",
-    link: <Sun className="w-6 h-6 text-yellow-400" />,
+    link: <Flower className="w-6 h-6 text-pink-500" />,
   },
   {
     id: 6,
     name: "June",
-    link: <Flame className="w-6 h-6 text-orange-500" />,
+    link: <Sun className="w-6 h-6 text-amber-500" />,
   },
   {
     id: 7,
     name: "July",
-    link: <Sun className="w-6 h-6 text-orange-400" />,
+    link: <Palmtree className="w-6 h-6 text-teal-600" />,
   },
   {
     id: 8,
     name: "August",
-    link: <Leaf className="w-6 h-6 text-green-700" />,
+    link: <Flame className="w-6 h-6 text-orange-500" />,
   },
   {
     id: 9,
     name: "September",
-    link: <Leaf className="w-6 h-6 text-amber-500" />,
+    link: <GraduationCap className="w-6 h-6 text-indigo-500" />,
   },
   {
     id: 10,
     name: "October",
-    link: <CloudSun className="w-6 h-6 text-orange-600" />,
+    link: <Ghost className="w-6 h-6 text-purple-500" />,
   },
   {
     id: 11,
     name: "November",
-    link: <CloudSun className="w-6 h-6 text-gray-600" />,
+    link: <Gift className="w-6 h-6 text-red-500" />,
   },
   {
     id: 12,
     name: "December",
-    link: <CloudSnow className="w-6 h-6 text-blue-500" />,
+    link: <TreePine className="w-6 h-6 text-green-600" />,
   },
 ];
 
