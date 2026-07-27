@@ -138,6 +138,23 @@ function LoginInForm() {
       </p>
 
       <form className="my-8" onSubmit={handleSubmit}>
+        <div className="flex flex-col space-y-4">
+          <button
+            className="relative group/btn flex space-x-2 items-center justify-center px-4 w-full text-black rounded-md h-10 font-medium shadow-input bg-gray-50 dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_var(--neutral-800)] disabled:opacity-50"
+            type="button"
+            onClick={() => handleGoogleLogin()}
+            disabled={isGooglePending}
+          >
+            <IconBrandGoogle className="h-4 w-4 text-neutral-800 dark:text-neutral-300" />
+            <span className="text-neutral-700 dark:text-neutral-300 text-sm">
+              {isGooglePending ? "Connecting to Google..." : "Continue with Google"}
+            </span>
+            <BottomGradient />
+          </button>
+        </div>
+
+        <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-6 h-[1px] w-full" />
+
         <LabelInputContainer className="mb-4">
           <Label htmlFor="email">
             Username/Email Address <span className="text-red-500">*</span>
@@ -165,7 +182,6 @@ function LoginInForm() {
           />
         </LabelInputContainer>
 
-
         {isPending ? (
           <Button
             disabled
@@ -183,23 +199,6 @@ function LoginInForm() {
             <BottomGradient />
           </button>
         )}
-
-        <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-8 h-[1px] w-full" />
-
-        <div className="flex flex-col space-y-4">
-          <button
-            className="relative group/btn flex space-x-2 items-center justify-center px-4 w-full text-black rounded-md h-10 font-medium shadow-input bg-gray-50 dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_var(--neutral-800)] disabled:opacity-50"
-            type="button"
-            onClick={() => handleGoogleLogin()}
-            disabled={isGooglePending}
-          >
-            <IconBrandGoogle className="h-4 w-4 text-neutral-800 dark:text-neutral-300" />
-            <span className="text-neutral-700 dark:text-neutral-300 text-sm">
-              {isGooglePending ? "Connecting to Google..." : "Continue with Google"}
-            </span>
-            <BottomGradient />
-          </button>
-        </div>
       </form>
       <Toaster />
     </div>
